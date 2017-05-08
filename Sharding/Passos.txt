@@ -1,0 +1,66 @@
+﻿
+SHARDING:
+=========
+
+20170424:
+=========
+OBS:
+- (Win) Para Windows
+- (Lin) Para Linux
+- (**) Para os dois
+
+Criado servidor de configuração: cfgSrv01
+--------------------------------------------
+(**) dir: /data/configdb
+(Lin) mongod --configsvr --replSet cfgSrv01 --port 27010 --logpath /data/logs/log.srv01 --fork
+(Win) mongod --configsvr --replSet cfgSrv01 --port 27010
+
+(**) mongo --port 27010
+     rs.initiate()
+
+
+Criado Shard: MonSrd01
+----------------------
+(**) dir: /data/db-srd-01
+(Lin) mongod --shardsvr --replSet MonSrd01 --port 27011 --dbpath /data/db-srd-01/ --logpath /data/logs/log.srd01 --fork
+(Win) mongod --shardsvr --replSet Srd01 --port 27011 --dbpath /data/db-srd-01/
+
+(**) mongo --port 27011
+     rs.initiate()
+
+
+Criado Shard: MonSrd02
+----------------------
+(**) dir: /data/db-srd-03
+(Win) mongod --shardsvr --replSet MonSrd02 --port 27012 --dbpath /data/db-srd-03/
+(Lin) mongod --shardsvr --replSet Srd03 --port 27012 --dbpath /data/db-srd-03/ --logpath /data/logs/log.srd03 --fork)
+
+(**) mongo --port 27012
+     rs.initiate()
+
+
+Inicia Mongos:
+--------------
+(Win) mongos --configdb cfgSrv01/localhost:27010 --port 27013
+(Lin) mongos --configdb cfgSrv01/localhost:27010 --port 27013 --logpath /data/logs/log.s01 --fork))
+
+(**) mongo --port 27013
+
+(**) Adiciona Shards:
+---------------------
+sh.addShard ("Srd01/DCP-046109:27011")
+sh.addShard ("Srd03/cem-008046107:27012")
+
+sh.enableSharding("censo2010-srd")
+sh.shardCollection("censo2010.teste01", { _id: 1 } )
+
+Para carga de dados:
+--------------------
+mongoimport -v --port 27013 -d censo2010-srd -c teste01 --type csv --headerline --file tstEntrada-1.csv
+
+
+
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\ArqsEntrada>mongoimport -v --port 27013 -
+d censo2010-srd -c tPes --type csv --headerline --file tPes.csv
+

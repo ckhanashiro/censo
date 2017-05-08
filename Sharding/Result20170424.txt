@@ -1,0 +1,739 @@
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo VAI INICIAR IMPORT UF: 24/04/2017 18:15:41,90 
+VAI INICIAR IMPORT UF: 24/04/2017 18:15:41,90
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>-- mongoimport -v --port 27013 -d censo2010-srd -c uf --type csv --headerline --file uf.csv 
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU UF. INICIA IMPORT TEMI: 24/04/2017 18:15:41,90 
+TERMINOU UF. INICIA IMPORT TEMI: 24/04/2017 18:15:41,90
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>mongoimport -v --port 27013 -d censo2010-srd -c tEmi --type csv --headerline --file c:\Clovis\01-Censos\03-Desenv\04-Mongo\ArqsEntrada\tEmi.csv 
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU TEMI. INICIA IMPORT TMOR: 24/04/2017 18:15:52,26 
+TERMINOU TEMI. INICIA IMPORT TMOR: 24/04/2017 18:15:52,26
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>mongoimport -v --port 27013 -d censo2010-srd -c tMor --type csv --headerline --file c:\Clovis\01-Censos\03-Desenv\04-Mongo\ArqsEntrada\tMor.csv 
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU TMOR. INICIA IMPORT TDOM: 24/04/2017 18:16:08,54 
+TERMINOU TMOR. INICIA IMPORT TDOM: 24/04/2017 18:16:08,54
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>mongoimport -v --port 27013 -d censo2010-srd -c tDom --type csv --headerline --file c:\Clovis\01-Censos\03-Desenv\04-Mongo\ArqsEntrada\tDom.csv 
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU TDOM. INICIA IMPORT TPES: 24/04/2017 18:41:42,33 
+TERMINOU TDOM. INICIA IMPORT TPES: 24/04/2017 18:41:42,33
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>mongoimport -v --port 27013 -d censo2010-srd -c tPes --type csv --headerline --file c:\Clovis\01-Censos\03-Desenv\04-Mongo\ArqsEntrada\tPes.csv 
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU TPES. INICIA IMPORT TGER: 24/04/2017 21:25:41,32 
+TERMINOU TPES. INICIA IMPORT TGER: 24/04/2017 21:25:41,32
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>mongoimport -v --port 27013 -d censo2010-srd -c tGer --type csv --headerline --file c:\Clovis\01-Censos\03-Desenv\04-Mongo\ArqsEntrada\tGer.csv 
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU IMPORT TGER: 25/04/2017  1:29:59,78 
+TERMINOU IMPORT TGER: 25/04/2017  1:29:59,78
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo VAI INICIAR TESTES CONSULTAS (SEM INDEX): 25/04/2017  1:29:59,78 
+VAI INICIAR TESTES CONSULTAS (SEM INDEX): 25/04/2017  1:29:59,78
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>mongo --port 27013 Consultas-NoIndex.js 
+MongoDB shell version v3.4.2
+connecting to: mongodb://127.0.0.1:27013/
+MongoDB server version: 3.4.2
+
+Início da execução: 25/4/2017 @ 1:30:2:702
+
+Databases:
+{  "databases" : [ { "name" : "censo2010-srd", "sizeOnDisk" : 47987781632, "empty" : false, "shards" : { "Srd01" : 23995056128, "Srd03" : 23992725504 } }, { "name" : "admin", "sizeOnDisk" : 49152, "empty" : false }, { "name" : "config", "sizeOnDisk" : 4247552, "empty" : false } ],  "totalSize" : 47992078336,  "totalSizeMb" : 45768,  "ok" : 1 }
+
+
+DB 1: censo2010-srd
+DB 2: admin
+DB 3: config
+
+Coleções:
+tDom,tEmi,tGer,tMor,tPes,teste01,uf
+Tempo consulta DB e coleções: 0h:0m:0s:56ms
+Num registros tPes: 20635472
+25/4/2017 @ 1:30:2:782: Tempo Registros Pessoa: 0h:0m:0s:24ms
+
+
+Num registros tDom: 6192332
+Tempo Registros Domicílios: 0h:0m:0s:6ms
+
+
+Num registros tEmi: 53777
+Tempo Registros Emigração: 0h:0m:0s:7ms
+
+
+Num registros tMor: 111555
+Tempo Registros Mortalidade: 0h:0m:0s:7ms
+
+
+Num registros tger: 0
+Tempo Registros Tabela Geral: 0h:0m:0s:1ms
+
+
+Num registros tPes (IdGeral > 0): 0
+Tempo Registros Tabela Geral (IdGeral > 0): 0h:0m:0s:1ms
+
+
+Num Distinct V0300 tEmi: 45604
+Tempo Num Distinct V0300 tEmi: 0h:0m:0s:416ms
+
+
+Num Distinct V0300 tMor: 109593
+25/4/2017 @ 1:30:4:79: Tempo Num Distinct V0300 tMor: 0h:0m:0s:858ms
+
+
+Num Distinct V0300 tDom: 6192332
+Tempo Num Distinct V0300 tDom: 0h:0m:30s:16ms
+
+
+Num Distinct V0300 tPes: 6192332
+25/4/2017 @ 1:32:15:652: Tempo Num Distinct V0300 tPes: 0h:1m:41s:557ms
+
+
+2017-04-25T01:33:16.076-0300 I -        [thread1] Assertion: 13548:BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit. C:\data\mci\8845b2068c5e5f605acdd11fa9900147\src\src\mongo/bson/util/builder.h 330
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       log1p+0x2d2f39
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       log1p+0x2cf2d3
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       log1p+0x2d79d2
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       log1p+0x2c69fa
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       log1p+0x2c68a7
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       log1p+0x21830a
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       log1p+0x21a4ed
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] ucrtbase.DLL    crt_at_quick_exit+0x7d
+2017-04-25T01:33:16.181-0300 I CONTROL  [thread1] KERNEL32.DLL    BaseThreadInitThunk+0x22
+2017-04-25T01:33:16.182-0300 I CONTROL  [thread1] 
+
+ERRO! : 25/4/2017 @ 1:33:16:204Error: BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit.
+
+Num tPes Not In tDom: [object Object]
+25/4/2017 @ 1:33:16:204: Tempo tPes Not In tDom: 0h:1m:0s:552ms
+
+
+2017-04-25T01:47:13.534-0300 I -        [thread1] Assertion: 13548:BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit. C:\data\mci\8845b2068c5e5f605acdd11fa9900147\src\src\mongo/bson/util/builder.h 330
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:47:13.536-0300 I CONTROL  [thread1] 
+25/4/2017 @ 1:47:13:552
+ERRO! : Error: BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit.
+Num tDom Not In tPes: [object Object]
+Tempo tDom Not In tPes: 0h:13m:57s:348ms
+
+
+Num tDom Not In tMor: 6082739
+25/4/2017 @ 1:50:26:714: Tempo tDom Not In tMor: 0h:3m:13s:162ms
+
+
+2017-04-25T01:51:26.318-0300 I -        [thread1] Assertion: 13548:BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit. C:\data\mci\8845b2068c5e5f605acdd11fa9900147\src\src\mongo/bson/util/builder.h 330
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:51:26.320-0300 I CONTROL  [thread1] 
+
+ERRO! : Error: BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit.
+
+Num tMor Not In tDom: 6082739
+Tempo tMor Not In tDom: 0h:0m:59s:614ms
+
+
+Num tDom Not In tEmi: 6146728
+25/4/2017 @ 1:51:38:909: Tempo tDom Not In tEmi: 0h:0m:12s:581ms
+
+
+2017-04-25T01:52:25.853-0300 I -        [thread1] Assertion: 13548:BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit. C:\data\mci\8845b2068c5e5f605acdd11fa9900147\src\src\mongo/bson/util/builder.h 330
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1]              ???
+2017-04-25T01:52:25.855-0300 I CONTROL  [thread1] 
+
+ERRO! : Error: BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit.
+
+Num tEmi Not In tDom: 6146728
+25/4/2017 @ 1:52:25:864: Tempo tEmi Not In tDom: 0h:0m:46s:955ms
+
+
+{  "_id" : 1,  "Soma" : 190755799.0000001 }
+Tempo consulta (População Total): 0h:8m:6s:84ms
+
+
+{  "_id" : 1,  "Soma" : 58051449.00000003 }
+Tempo consulta (Domicílios Total): 0h:0m:39s:561ms
+
+
+{  "_id" : {  "ano" : 1 },  "NumReg" : 9704314,  "Soma" : 90621281.12863292 }
+{  "_id" : {  "ano" : 4 },  "NumReg" : 9148854,  "Soma" : 82820451.54871047 }
+{  "_id" : {  "ano" : 9 },  "NumReg" : 2684,  "Soma" : 36050.934366192734 }
+{  "_id" : {  "ano" : 3 },  "NumReg" : 211945,  "Soma" : 2105352.6816193624 }
+{  "_id" : {  "ano" : 2 },  "NumReg" : 1455841,  "Soma" : 14351162.010371786 }
+{  "_id" : {  "ano" : 5 },  "NumReg" : 111834,  "Soma" : 821500.6962993721 }
+Tempo consulta Pessoas por V0606: 0h:3m:29s:413ms
+
+
+{  "_id" : {  "Deficiencia" : 2 },  "NumReg" : 679955,  "Soma" : 6056532.885841878 }
+{  "_id" : {  "Deficiencia" : 3 },  "NumReg" : 3116842,  "Soma" : 29211481.664389066 }
+{  "_id" : {  "Deficiencia" : 1 },  "NumReg" : 49079,  "Soma" : 506377.0577984599 }
+Tempo consulta quantidade Total pessoas com deficiência (614) 1,2,3: 0h:1m:49s:611ms
+
+
+{  "_id" : {  "Deficiencia" : 1 },  "NumReg" : 49079,  "Soma" : 506377.0577984599 }
+{  "_id" : {  "Deficiencia" : 9 },  "NumReg" : 5450,  "Soma" : 66744.47769389211 }
+{  "_id" : {  "Deficiencia" : 2 },  "NumReg" : 679955,  "Soma" : 6056532.885841878 }
+{  "_id" : {  "Deficiencia" : 4 },  "NumReg" : 16784146,  "Soma" : 154914662.91427678 }
+{  "_id" : {  "Deficiencia" : 3 },  "NumReg" : 3116842,  "Soma" : 29211481.664389066 }
+Tempo consulta quantidade pessoas por deficiência (614): 0h:2m:48s:313ms
+
+
+assert: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.uf cannot be sharded"
+} : aggregate failed
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:16:14
+assert.commandWorked@src/mongo/shell/assert.js:370:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1319:5
+@Consultas-NoIndex.js:367:10
+
+2017-04-25T02:09:18.848-0300 E QUERY    [thread1] Error: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.uf cannot be sharded"
+} : aggregate failed :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:16:14
+assert.commandWorked@src/mongo/shell/assert.js:370:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1319:5
+@Consultas-NoIndex.js:367:10
+failed to load: Consultas-NoIndex.js
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU TESTES CONSULTAS (SEM INDEX): 25/04/2017  2:09:19,92 
+TERMINOU TESTES CONSULTAS (SEM INDEX): 25/04/2017  2:09:19,92
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo VAI CRIAR INDICES: 25/04/2017  2:09:19,92 
+VAI CRIAR INDICES: 25/04/2017  2:09:19,92
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>mongo --port 27013 CriaIndices.js 
+MongoDB shell version v3.4.2
+connecting to: mongodb://127.0.0.1:27013/
+MongoDB server version: 3.4.2
+
+Início da execução: 25/4/2017 @ 2:9:24:81
+
+Databases:
+{  "databases" : [ { "name" : "censo2010-srd", "sizeOnDisk" : 48015003648, "empty" : false, "shards" : { "Srd01" : 24021876736, "Srd03" : 23993126912 } }, { "name" : "admin", "sizeOnDisk" : 49152, "empty" : false }, { "name" : "config", "sizeOnDisk" : 4259840, "empty" : false } ],  "totalSize" : 48019312640,  "totalSizeMb" : 45794,  "ok" : 1 }
+
+
+DB 1: censo2010-srd
+DB 2: admin
+DB 3: config
+
+Coleções:
+tDom,tEmi,tGer,tMor,tPes,teste01,uf
+
+
+Tempo consulta DB e coleções: 0h:0m:2s:51ms
+
+
+VAI CRIAR ÍNDICES: Tue Apr 25 2017 02:09:26 GMT-0300 (Hora oficial do Brasil)
+
+
+Tempo criação índice tEmi(V0300): 0h:0m:1s:751ms
+
+
+Tempo criação índice tMor(V0300): 0h:0m:1s:560ms
+
+
+Tempo criação índice tDom(V0300): 0h:2m:24s:105ms
+
+
+Tempo criação índice tPes(V0300): 0h:2m:48s:968ms
+
+
+Tempo criação índice tGer(D_V0300): 0h:9m:0s:309ms
+
+
+Tempo criação índice tGer(P_V0300): 0h:6m:53s:237ms
+
+
+Tempo criação índice tGer(M_V0300): 0h:3m:56s:14ms
+
+
+Tempo criação índice tGer(E_V0300): 0h:3m:54s:180ms
+
+
+Tempo criação índice tPes(V0010): 0h:2m:28s:715ms
+
+
+Tempo criação índice tDom(V0010): 0h:0m:31s:659ms
+
+
+Tempo criação índice tPes(V0606): 0h:2m:31s:986ms
+
+
+Tempo criação índice tPes(V0606,V0010): 0h:2m:21s:131ms
+
+
+Tempo criação índice tPes(V0614): 0h:1m:56s:200ms
+
+
+Tempo criação índice tPes(V0614,V0010): 0h:2m:6s:936ms
+
+
+Tempo criação índice tPes(V0010,V0614): 0h:1m:55s:589ms
+
+
+Tempo criação índice tPes(V0614,V0010,V0001): 0h:1m:55s:276ms
+
+
+Tempo criação índice tPes(V0001,V0010,V0614): 0h:2m:5s:357ms
+
+
+Tempo criação índice tGer(IdMortalidade): 0h:4m:59s:32ms
+
+
+Tempo criação índice tGer(IdEmigracao): 0h:3m:58s:778ms
+
+
+Tempo criação índice tGer(IdDomicilio): 0h:2m:11s:267ms
+
+
+Tempo criação índice tGer(IdPessoa): 0h:2m:22s:224ms
+
+
+Tempo criação índice tGer(P_V0001): 0h:2m:19s:269ms
+
+
+Tempo criação índice tGer(P_V0010): 0h:2m:36s:152ms
+
+
+Tempo criação índice tGer(V0614): 0h:2m:39s:922ms
+
+
+Tempo criação índice tGer(V0614,P_V0010): 0h:3m:10s:113ms
+
+
+Tempo criação índice tGer(V0001,V0614,P_V0010): 0h:3m:47s:941ms
+
+
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU CRIAÇÃO DE INDICES: 25/04/2017  3:24:24,42 
+TERMINOU CRIAÇÃO DE INDICES: 25/04/2017  3:24:24,42
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo VAI INICIAR TESTES CONSULTAS (COM INDEX): 25/04/2017  3:24:24,42 
+VAI INICIAR TESTES CONSULTAS (COM INDEX): 25/04/2017  3:24:24,42
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>mongo --port 27013 Consultas.js 
+MongoDB shell version v3.4.2
+connecting to: mongodb://127.0.0.1:27013/
+MongoDB server version: 3.4.2
+
+Início da execução: 25/4/2017 @ 3:24:25:717
+
+Databases:
+{  "databases" : [ { "name" : "censo2010-srd", "sizeOnDisk" : 51111432192, "empty" : false, "shards" : { "Srd01" : 25570992128, "Srd03" : 25540440064 } }, { "name" : "admin", "sizeOnDisk" : 49152, "empty" : false }, { "name" : "config", "sizeOnDisk" : 4259840, "empty" : false } ],  "totalSize" : 51115741184,  "totalSizeMb" : 48747,  "ok" : 1 }
+
+
+DB 1: censo2010-srd
+DB 2: admin
+DB 3: config
+
+Coleções:
+tDom,tEmi,tGer,tMor,tPes,teste01,uf
+
+
+Tempo consulta DB e coleções: 0h:0m:2s:91ms
+
+Num registros tPes: 20635472
+25/4/2017 @ 3:24:27:812: Tempo Registros Pessoa: 0h:0m:0s:4ms
+
+
+Num registros tDom: 6192332
+Tempo Registros Domicílios: 0h:0m:0s:3ms
+
+
+Num registros tEmi: 53777
+Tempo Registros Emigração: 0h:0m:0s:3ms
+
+
+Num registros tMor: 111555
+Tempo Registros Mortalidade: 0h:0m:0s:3ms
+
+
+Num registros tger: 0
+Tempo Registros Tabela Geral: 0h:0m:0s:18ms
+
+
+Num registros tPes (IdGeral > 0): 0
+Tempo Registros Tabela Geral (IdGeral > 0): 0h:0m:0s:2ms
+
+
+Num Distinct V0300 tEmi: 45604
+Tempo Num Distinct V0300 tEmi: 0h:0m:0s:446ms
+
+
+Num Distinct V0300 tMor: 109593
+25/4/2017 @ 3:24:29:200: Tempo Num Distinct V0300 tMor: 0h:0m:0s:913ms
+
+
+Num Distinct V0300 tDom: 6192332
+Tempo Num Distinct V0300 tDom: 0h:0m:27s:98ms
+
+
+Num Distinct V0300 tPes: 6192332
+25/4/2017 @ 3:28:2:997: Tempo Num Distinct V0300 tPes: 0h:3m:6s:699ms
+
+
+2017-04-25T03:28:47.219-0300 I -        [thread1] Assertion: 13548:BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit. C:\data\mci\8845b2068c5e5f605acdd11fa9900147\src\src\mongo/bson/util/builder.h 330
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       log1p+0x2d2f39
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       log1p+0x2cf2d3
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       log1p+0x2d79d2
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       log1p+0x2c69fa
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       log1p+0x2c68a7
+2017-04-25T03:28:47.292-0300 I CONTROL  [thread1] mongo.exe       log1p+0x21830a
+2017-04-25T03:28:47.293-0300 I CONTROL  [thread1] mongo.exe       log1p+0x21a4ed
+2017-04-25T03:28:47.293-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.293-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.293-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.293-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.293-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.293-0300 I CONTROL  [thread1] mongo.exe       ???
+2017-04-25T03:28:47.293-0300 I CONTROL  [thread1] ucrtbase.DLL    crt_at_quick_exit+0x7d
+2017-04-25T03:28:47.293-0300 I CONTROL  [thread1] KERNEL32.DLL    BaseThreadInitThunk+0x22
+2017-04-25T03:28:47.293-0300 I CONTROL  [thread1] 
+
+ERRO! : 25/4/2017 @ 3:28:47:309Error: BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit.
+
+Num tPes Not In tDom: [object Object]
+25/4/2017 @ 3:28:47:309: Tempo tPes Not In tDom: 0h:0m:44s:312ms
+
+
+2017-04-25T03:33:13.332-0300 I -        [thread1] Assertion: 13548:BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit. C:\data\mci\8845b2068c5e5f605acdd11fa9900147\src\src\mongo/bson/util/builder.h 330
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:33:13.334-0300 I CONTROL  [thread1] 
+25/4/2017 @ 3:33:13:352
+ERRO! : Error: BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit.
+
+Num tDom Not In tPes: [object Object]
+Tempo tDom Not In tPes: 0h:4m:26s:43ms
+
+
+Num tDom Not In tMor: 6082739
+25/4/2017 @ 3:58:34:131: Tempo tDom Not In tMor: 0h:25m:20s:779ms
+
+
+2017-04-25T03:59:17.846-0300 I -        [thread1] Assertion: 13548:BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit. C:\data\mci\8845b2068c5e5f605acdd11fa9900147\src\src\mongo/bson/util/builder.h 330
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1]              ???
+2017-04-25T03:59:17.848-0300 I CONTROL  [thread1] 
+
+ERRO! : Error: BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit.
+
+Num tMor Not In tDom: 6082739
+Tempo tMor Not In tDom: 0h:0m:43s:725ms
+
+
+Num tDom Not In tEmi: 6146728
+25/4/2017 @ 3:59:47:291: Tempo tDom Not In tEmi: 0h:0m:29s:435ms
+
+
+2017-04-25T04:00:28.969-0300 I -        [thread1] Assertion: 13548:BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit. C:\data\mci\8845b2068c5e5f605acdd11fa9900147\src\src\mongo/bson/util/builder.h 330
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1] mongo.exe    ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1]              ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1]              ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1]              ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1]              ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1]              ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1]              ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1]              ???
+2017-04-25T04:00:28.971-0300 I CONTROL  [thread1] 
+
+ERRO! : Error: BufBuilder attempted to grow() to 134217728 bytes, past the 64MB limit.
+
+Num tEmi Not In tDom: 6146728
+25/4/2017 @ 4:0:28:979: Tempo tEmi Not In tDom: 0h:0m:41s:688ms
+
+
+assert: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.tDom cannot be sharded"
+} : aggregate failed
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:16:14
+assert.commandWorked@src/mongo/shell/assert.js:370:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1319:5
+@Consultas.js:218:10
+
+
+ERRO! : Error: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.tDom cannot be sharded"
+} : aggregate failed
+
+Join tEmi e tDom: 6146728
+25/4/2017 @ 4:0:28:980: Tempo Aggregate (Join - tEmi e tDom com DiskUse): 0h:0m:0s:1ms
+
+
+assert: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.tDom cannot be sharded"
+} : aggregate failed
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:16:14
+assert.commandWorked@src/mongo/shell/assert.js:370:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1319:5
+@Consultas.js:241:10
+
+
+ERRO! : Error: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.tDom cannot be sharded"
+} : aggregate failed
+
+Join tEmi e tDom: 6146728
+25/4/2017 @ 4:0:28:980: Tempo Aggregate (Join - tEmi e tDom SEM DiskUse): 0h:0m:0s:0ms
+
+
+assert: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.tEmi cannot be sharded"
+} : aggregate failed
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:16:14
+assert.commandWorked@src/mongo/shell/assert.js:370:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1319:5
+@Consultas.js:263:10
+
+
+ERRO! : Error: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.tEmi cannot be sharded"
+} : aggregate failed
+
+Join tDom e tEmi: 6146728
+25/4/2017 @ 4:0:28:981: Tempo Aggregate (Join - tDom e tEmi COM DiskUse): 0h:0m:0s:1ms
+
+
+assert: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.tEmi cannot be sharded"
+} : aggregate failed
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:16:14
+assert.commandWorked@src/mongo/shell/assert.js:370:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1319:5
+@Consultas.js:286:10
+
+
+ERRO! : Error: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.tEmi cannot be sharded"
+} : aggregate failed
+
+Join tDom e tEmi: 6146728
+25/4/2017 @ 4:0:28:981: Tempo Aggregate (Join - tDom e tEmi SEM DiskUse): 0h:0m:0s:0ms
+
+
+assert: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.tDom cannot be sharded"
+} : aggregate failed
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:16:14
+assert.commandWorked@src/mongo/shell/assert.js:370:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1319:5
+@Consultas.js:308:10
+
+
+ERRO! : Error: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.tDom cannot be sharded"
+} : aggregate failed
+
+Join tPes e tDom: 6146728
+25/4/2017 @ 4:0:28:982: Tempo Aggregate (Join - tPes e tDom SEM DiskUse): 0h:0m:0s:1ms
+
+
+{  "_id" : 1,  "Soma" : 190755799.0000001 }
+Tempo consulta (População Total): 0h:3m:0s:698ms
+
+
+{  "_id" : 1,  "Soma" : 58051449.00000003 }
+Tempo consulta (Domicílios Total): 0h:1m:55s:135ms
+
+
+{  "_id" : {  "ano" : 1 },  "NumReg" : 9704314,  "Soma" : 90621281.12863292 }
+{  "_id" : {  "ano" : 4 },  "NumReg" : 9148854,  "Soma" : 82820451.54871047 }
+{  "_id" : {  "ano" : 9 },  "NumReg" : 2684,  "Soma" : 36050.934366192734 }
+{  "_id" : {  "ano" : 3 },  "NumReg" : 211945,  "Soma" : 2105352.6816193624 }
+{  "_id" : {  "ano" : 2 },  "NumReg" : 1455841,  "Soma" : 14351162.010371786 }
+{  "_id" : {  "ano" : 5 },  "NumReg" : 111834,  "Soma" : 821500.6962993721 }
+Tempo consulta Pessoas por V0606: 0h:2m:6s:697ms
+
+
+{  "_id" : {  "Deficiencia" : 1 },  "NumReg" : 49079,  "Soma" : 506377.0577984599 }
+{  "_id" : {  "Deficiencia" : 2 },  "NumReg" : 679955,  "Soma" : 6056532.885841878 }
+{  "_id" : {  "Deficiencia" : 3 },  "NumReg" : 3116842,  "Soma" : 29211481.664389066 }
+Tempo consulta quantidade Total pessoas com deficiência (614) 1,2,3: 0h:3m:52s:350ms
+
+
+{  "_id" : {  "Deficiencia" : 1 },  "NumReg" : 49079,  "Soma" : 506377.0577984599 }
+{  "_id" : {  "Deficiencia" : 9 },  "NumReg" : 5450,  "Soma" : 66744.47769389211 }
+{  "_id" : {  "Deficiencia" : 2 },  "NumReg" : 679955,  "Soma" : 6056532.885841878 }
+{  "_id" : {  "Deficiencia" : 4 },  "NumReg" : 16784146,  "Soma" : 154914662.91427678 }
+{  "_id" : {  "Deficiencia" : 3 },  "NumReg" : 3116842,  "Soma" : 29211481.664389066 }
+Tempo consulta quantidade pessoas por deficiência (614): 0h:2m:28s:463ms
+
+
+assert: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.uf cannot be sharded"
+} : aggregate failed
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:16:14
+assert.commandWorked@src/mongo/shell/assert.js:370:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1319:5
+@Consultas.js:411:10
+
+2017-04-25T04:13:52.357-0300 E QUERY    [thread1] Error: command failed: {
+	"code" : 28769,
+	"ok" : 0,
+	"errmsg" : "censo2010-srd.uf cannot be sharded"
+} : aggregate failed :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:16:14
+assert.commandWorked@src/mongo/shell/assert.js:370:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1319:5
+@Consultas.js:411:10
+failed to load: Consultas.js
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU TESTES CONSULTAS (COM INDEX): 25/04/2017  4:13:53,24 
+TERMINOU TESTES CONSULTAS (COM INDEX): 25/04/2017  4:13:53,24

@@ -1,0 +1,135 @@
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo VAI INICIAR IMPORT UF: 24/04/2017 17:18:36,69 
+VAI INICIAR IMPORT UF: 24/04/2017 17:18:36,69
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>mongoimport -v --port 27013 -d censo2010-srd -c uf --type csv --headerline --file uf.csv 
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>#mongoimport -v --port 27013 -d censo2010-srd -c teste01 --type csv --headerline --file tstEntrada-1.csv 
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU UF. INICIA IMPORT TEMI: 24/04/2017 17:18:37,45 
+TERMINOU UF. INICIA IMPORT TEMI: 24/04/2017 17:18:37,45
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo VAI INICIAR TESTES CONSULTAS (SEM INDEX): 24/04/2017 17:18:37,45 
+VAI INICIAR TESTES CONSULTAS (SEM INDEX): 24/04/2017 17:18:37,45
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>mongo --port 27013 00-Consultas-NoIndex.js 
+MongoDB shell version v3.4.2
+connecting to: mongodb://127.0.0.1:27013/
+MongoDB server version: 3.4.2
+
+Início da execução: 24/4/2017 @ 17:18:38:63
+
+Databases:
+{  "databases" : [ { "name" : "censo2010-srd", "sizeOnDisk" : 54317056, "empty" : false, "shards" : { "Srd01" : 28114944, "Srd03" : 26202112 } }, { "name" : "admin", "sizeOnDisk" : 49152, "empty" : false }, { "name" : "config", "sizeOnDisk" : 1433600, "empty" : false } ],  "totalSize" : 55799808,  "totalSizeMb" : 53,  "ok" : 1 }
+
+
+DB 1: censo2010-srd
+DB 2: admin
+DB 3: config
+
+Coleções:
+tDom,tEmi,tGer,tMor,tPes,teste01,uf
+Tempo consulta DB e coleções: 0h:0m:0s:7ms
+Num registros tPes: 2000000
+24/4/2017 @ 17:18:38:97: Tempo Registros teste01: 0h:0m:0s:27ms
+
+
+Num Distinct V0300 tEmi: 2000000
+Tempo Num Distinct campo1 teste01: 0h:0m:6s:825ms
+
+
+
+Num tPes Not In tDom: 1999973
+24/4/2017 @ 17:18:47:830: Tempo tPes Not In tDom: 0h:0m:2s:908ms
+
+
+{  "_id" : 1,  "Soma" : NumberLong("2000001000000") }
+Tempo consulta (População Total): 0h:0m:1s:691ms
+
+
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU TESTES CONSULTAS (SEM INDEX): 24/04/2017 17:18:49,76 
+TERMINOU TESTES CONSULTAS (SEM INDEX): 24/04/2017 17:18:49,76
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo VAI CRIAR INDICES: 24/04/2017 17:18:49,76 
+VAI CRIAR INDICES: 24/04/2017 17:18:49,76
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>mongo --port 27013 00-CriaIndices.js 
+MongoDB shell version v3.4.2
+connecting to: mongodb://127.0.0.1:27013/
+MongoDB server version: 3.4.2
+
+Início da execução: 24/4/2017 @ 17:18:50:328
+
+Databases:
+{  "databases" : [ { "name" : "censo2010-srd", "sizeOnDisk" : 54317056, "empty" : false, "shards" : { "Srd01" : 28114944, "Srd03" : 26202112 } }, { "name" : "admin", "sizeOnDisk" : 49152, "empty" : false }, { "name" : "config", "sizeOnDisk" : 1433600, "empty" : false } ],  "totalSize" : 55799808,  "totalSizeMb" : 53,  "ok" : 1 }
+
+
+DB 1: censo2010-srd
+DB 2: admin
+DB 3: config
+
+Coleções:
+tDom,tEmi,tGer,tMor,tPes,teste01,uf
+
+
+Tempo consulta DB e coleções: 0h:0m:0s:7ms
+
+
+VAI CRIAR ÍNDICES: Mon Apr 24 2017 17:18:50 GMT-0300 (Hora oficial do Brasil)
+
+
+Tempo criação índice tEmi(V0300): 0h:0m:2s:757ms
+
+
+Tempo criação índice tMor(V0300): 0h:0m:2s:921ms
+
+
+Tempo criação índice tPes(V0606,V0010): 0h:0m:3s:637ms
+
+
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU CRIAÇÃO DE INDICES: 24/04/2017 17:18:59,89 
+TERMINOU CRIAÇÃO DE INDICES: 24/04/2017 17:18:59,89
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo VAI INICIAR TESTES CONSULTAS (COM INDEX): 24/04/2017 17:18:59,89 
+VAI INICIAR TESTES CONSULTAS (COM INDEX): 24/04/2017 17:18:59,89
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>mongo --port 27013 00-Consultas-NoIndex.js 
+MongoDB shell version v3.4.2
+connecting to: mongodb://127.0.0.1:27013/
+MongoDB server version: 3.4.2
+
+Início da execução: 24/4/2017 @ 17:19:0:457
+
+Databases:
+{  "databases" : [ { "name" : "censo2010-srd", "sizeOnDisk" : 122568704, "empty" : false, "shards" : { "Srd01" : 63414272, "Srd03" : 59154432 } }, { "name" : "admin", "sizeOnDisk" : 49152, "empty" : false }, { "name" : "config", "sizeOnDisk" : 1433600, "empty" : false } ],  "totalSize" : 124051456,  "totalSizeMb" : 118,  "ok" : 1 }
+
+
+DB 1: censo2010-srd
+DB 2: admin
+DB 3: config
+
+Coleções:
+tDom,tEmi,tGer,tMor,tPes,teste01,uf
+Tempo consulta DB e coleções: 0h:0m:0s:15ms
+Num registros tPes: 2000000
+24/4/2017 @ 17:19:0:474: Tempo Registros teste01: 0h:0m:0s:2ms
+
+
+Num Distinct V0300 tEmi: 2000000
+Tempo Num Distinct campo1 teste01: 0h:0m:6s:768ms
+
+
+
+Num tPes Not In tDom: 1999973
+24/4/2017 @ 17:19:10:166: Tempo tPes Not In tDom: 0h:0m:2s:924ms
+
+
+{  "_id" : 1,  "Soma" : NumberLong("2000001000000") }
+Tempo consulta (População Total): 0h:0m:1s:446ms
+
+
+
+C:\Clovis\01-Censos\03-Desenv\04-Mongo\Sharding>echo TERMINOU TESTES CONSULTAS (COM INDEX): 24/04/2017 17:19:11,85 
+TERMINOU TESTES CONSULTAS (COM INDEX): 24/04/2017 17:19:11,85
